@@ -1,9 +1,26 @@
+simulators = new Mongo.Collection("simulators");
+
 if (Meteor.isClient) {
     Template.body.helpers({
-        simulators: [
-            { name: "Simulator 1", ip: "192.168.0.1", status: "available" },
-            { name: "Simulator 2", ip: "192.168.0.2", status: "available" },
-            { name: "Simulator 3", ip: "192.168.0.3", status: "available" }
-        ]
+        simulators: function() {
+            return simulators.find({});
+        }
     });
+    
+Template.body.events({
+  "submit form": function (event) {
+      var name = event.target.name.value;
+      var ip = event.target.ip.value;
+      
+      simulators.insert({
+          name: name,
+          ip: ip,
+          status: "available"
+      });
+      
+      event.target.name.value = "";
+      event.target.ip.value = "";
+      return false;
+  }
+});
 }
