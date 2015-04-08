@@ -1,14 +1,41 @@
 <head>
-  <title>GenericMeteorApp</title>
+    <title>GenericMeteorApp</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+<div class="container">
+    <header>
+        <h1>Simulator List</h1>
+    </header>
 
-  {{> hello}}
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Panel heading</div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>IP</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each simulators}}
+                    {{> simulator}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="simulator">
+    <tr>
+        <th scope="row">{{name}}</th>
+        <td>{{ip}}</td>
+        <td>{{status}}</td>
+    </tr>
 </template>

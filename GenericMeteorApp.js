@@ -1,23 +1,9 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
-
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+    Template.body.helpers({
+        simulators: [
+            { name: "Simulator 1", ip: "192.168.0.1", status: "available" },
+            { name: "Simulator 2", ip: "192.168.0.2", status: "available" },
+            { name: "Simulator 3", ip: "192.168.0.3", status: "available" }
+        ]
+    });
 }
