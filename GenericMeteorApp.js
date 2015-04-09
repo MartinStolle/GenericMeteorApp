@@ -8,19 +8,22 @@ if (Meteor.isClient) {
     });
     
 Template.body.events({
-  "submit form": function (event) {
-      var name = event.target.name.value;
-      var ip = event.target.ip.value;
-      
-      simulators.insert({
-          name: name,
-          ip: ip,
-          status: "available"
-      });
-      
-      event.target.name.value = "";
-      event.target.ip.value = "";
-      return false;
-  }
+    "click #add": function (event) {
+        var name = document.getElementById("name").value;
+        var ip = document.getElementById("ip").value;
+
+        simulators.insert({
+            name: name,
+            ip: ip,
+            status: "available"
+        });
+
+        document.getElementById("name").value = "";
+        document.getElementById("ip").value = "";
+        return false;
+    },
+    "click #delete": function () {
+        simulators.remove(this._id);
+    }
 });
 }
