@@ -1,0 +1,20 @@
+<template name="simulatortable">
+    <div class="panel panel-default">
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>IP</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each simulators}}
+                    {{> simulatorrow}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>
