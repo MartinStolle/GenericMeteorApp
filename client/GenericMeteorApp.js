@@ -12,8 +12,9 @@ Template.body.events({
         event.preventDefault();
         var name = document.getElementById("name").value;
         var ip = document.getElementById("ip").value;
+        var status = document.getElementById("status").value;
 
-        Meteor.call('insertSimulator', name, ip, "available");
+        Meteor.call('insertSimulator', name, ip, status);
 
         document.getElementById("name").value = "";
         document.getElementById("ip").value = "";
@@ -24,7 +25,8 @@ Template.body.events({
         var selectedSimulator = Session.get('selectedSimulator');
         var name = document.getElementById("name").value;
         var ip = document.getElementById("ip").value;
-        Meteor.call('modifySimulator', selectedSimulator, name, ip, "available");
+        var status = document.getElementById("status").value;
+        Meteor.call('modifySimulator', selectedSimulator, name, ip, status);
     },
     "click #delete": function () {
         Meteor.call('removeSimulator', this._id);
