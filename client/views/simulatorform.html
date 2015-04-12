@@ -11,9 +11,9 @@
         <div class="form-group">
             <label for="ip">Status:</label>
             <select id="status" class="form-control">
-                <option>Available</option>
-                <option>Not available</option>
-                <option>Maintenance</option>
+                {{#each statuses}}
+                    <option>{{name}}</option>
+                {{/each}}
             </select>
         </div>
         <button id="add" type="submit" class="btn btn-default">Add</button>
