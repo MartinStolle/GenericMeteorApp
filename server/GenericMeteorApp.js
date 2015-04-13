@@ -8,9 +8,10 @@ Meteor.publish('Statuses', function () {
 
 // Methods execute on the server after being triggered from the client
 Meteor.methods({
-    'insertSimulator': function(name, ip, status) {
+    'insertSimulator': function(name, hostname, ip, status) {
         simulators.insert({
             name: name,
+            hostname: hostname,
             ip: ip,
             status: status
         });
@@ -18,8 +19,13 @@ Meteor.methods({
     'removeSimulator': function(id){
         simulators.remove(id);
     },
-    'modifySimulator': function(selectedSimulator, name, ip, status){
-        simulators.update(selectedSimulator, {$set: {name: name, ip: ip, status: status}});
+    'modifySimulator': function(selectedSimulator, name, hostname, ip, status){
+        simulators.update(selectedSimulator, {$set: {
+            name: name,
+            hostname: hostname,
+            ip: ip,
+            status: status
+        }});
     }
 });
 
