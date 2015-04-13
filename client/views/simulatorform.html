@@ -16,7 +16,7 @@
             <label for="ip">Status:</label>
             <select id="status" class="form-control">
                 {{#each statuses}}
-                    <option>{{name}}</option>
+                    <option {{selectedStatus}}>{{name}}</option>
                 {{/each}}
             </select>
         </div>

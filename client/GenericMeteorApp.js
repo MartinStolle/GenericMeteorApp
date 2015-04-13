@@ -10,6 +10,27 @@ Template.simulatortable.helpers({
 Template.simulatorform.helpers({
     statuses: function () {
         return statuses.find({});
+    },
+    'selectedStatus': function(){
+        var statusId = this._id;
+		var status = statuses.findOne(statusId);
+		var selectedSimulator = Session.get('selectedSimulator');
+		var simulator = simulators.findOne(selectedSimulator);
+        if (simulator.status == status.name) {
+            return "selected";
+        }
+    }
+});
+
+Template.simulatorrow.helpers({
+    'selectedClass': function(){
+        var simulatorId = this._id;
+        var selectedSimulator = Session.get('selectedSimulator');
+        // Do these IDs match?
+        if (simulatorId == selectedSimulator) {
+            // Return a CSS class
+            return "success";
+        }
     }
 });
 
@@ -26,6 +47,7 @@ Template.body.events({
 
         document.getElementById("name").value = "";
         document.getElementById("ip").value = "";
+        document.getElementById("hostname").value = "";
         return false;
     },
     "click #edit": function () {
@@ -44,7 +66,9 @@ Template.body.events({
         var simulatorId = this._id;
         var simulator = simulators.findOne(simulatorId);
         document.getElementById("name").value = simulator.name;
+        document.getElementById("hostname").value = simulator.hostname;
         document.getElementById("ip").value = simulator.ip;
+        //document.getElementById("status").value status = simulator.status;
         Session.set('selectedSimulator', simulatorId);
     }
 });
