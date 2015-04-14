@@ -1,5 +1,4 @@
 Meteor.subscribe('Simulators');
-Meteor.subscribe('Statuses');
 
 Template.simulatortable.helpers({
     simulators: function () {
@@ -7,23 +6,16 @@ Template.simulatortable.helpers({
     }
 });
 
-Template.simulatorform.helpers({
-    statuses: function () {
-        return statuses.find({});
-    },
-    'selectedStatus': function(){
-        var statusId = this._id;
-		var status = statuses.findOne(statusId);
-		var selectedSimulator = Session.get('selectedSimulator');
-		var simulator = simulators.findOne(selectedSimulator);
-        if (simulator.status == status.name) {
-            return "selected";
-        }
-    }
+Template.registerHelper("statusOption", function() {
+	return [
+		{label: "Available", value: "Available"},
+        {label: "Not Available", value: "Not Available"},
+        {label: "Maintenace", value: "Maintenance"}
+    ];
 });
 
 Template.simulatorrow.helpers({
-    'selectedClass': function(){
+    'selectedClass': function() {
         var simulatorId = this._id;
         var selectedSimulator = Session.get('selectedSimulator');
         // Do these IDs match?
@@ -35,28 +27,13 @@ Template.simulatorrow.helpers({
 });
 
 Template.body.events({
-    "click #add": function (event) {
-        // Prevent the browser from applying default behaviour to the form
-        event.preventDefault();
-        var name = document.getElementById("name").value;
-        var hostname = document.getElementById("hostname").value;
-        var ip = document.getElementById("ip").value;
-        var status = document.getElementById("status").value;
-
-        Meteor.call('insertSimulator', name, hostname, ip, status);
-
-        document.getElementById("name").value = "";
-        document.getElementById("ip").value = "";
-        document.getElementById("hostname").value = "";
-        return false;
-    },
     "click #edit": function () {
         event.preventDefault();
-        var selectedSimulator = Session.get('selectedSimulator');
+/*        var selectedSimulator = Session.get('selectedSimulator');
         var name = document.getElementById("name").value;
         var hostname = document.getElementById("hostname").value;
         var ip = document.getElementById("ip").value;
-        var status = document.getElementById("status").value;
+        var status = document.getElementById("status").value;*/
         Meteor.call('modifySimulator', selectedSimulator, name, hostname, ip, status);
     },
     "click #delete": function () {
@@ -65,10 +42,11 @@ Template.body.events({
     "click td": function () {
         var simulatorId = this._id;
         var simulator = simulators.findOne(simulatorId);
-        document.getElementById("name").value = simulator.name;
-        document.getElementById("hostname").value = simulator.hostname;
-        document.getElementById("ip").value = simulator.ip;
-        //document.getElementById("status").value status = simulator.status;
+		var name = AutoForm.getFieldValue('insertSimulatorForm', 'name');
+		console.log(name);
+//        document.getElementById("name").value = simulator.name;
+//        document.getElementById("hostname").value = simulator.hostname;
+//        document.getElementById("ip").value = simulator.ip;
         Session.set('selectedSimulator', simulatorId);
     }
 });

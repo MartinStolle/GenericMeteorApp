@@ -1,26 +1,13 @@
 <template name="simulatorform">
-    <form role="form">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter simulator name">
-        </div>
-        <div class="form-group">
-            <label for="hostname">Hostname:</label>
-            <input type="text" class="form-control" id="hostname" placeholder="Enter hostname of simulator">
-        </div>
-        <div class="form-group">
-            <label for="ip">IP:</label>
-            <input type="text" class="form-control" id="ip" placeholder="Enter IP of simulator">
-        </div>
-        <div class="form-group">
-            <label for="ip">Status:</label>
-            <select id="status" class="form-control">
-                {{#each statuses}}
-                    <option {{selectedStatus}}>{{name}}</option>
-                {{/each}}
-            </select>
-        </div>
-        <button id="add" type="submit" class="btn btn-default">Add</button>
-        <button id="edit" type="submit" class="btn btn-default">Edit</button>
-    </form>
+	{{#autoForm collection="simulators" id="insertSimulatorForm" type="insert"}}
+	<fieldset>
+		<legend>Add\Edit Simulator</legend>
+		{{> afQuickField name='name'}}
+		{{> afQuickField name='hostname'}}
+		{{> afQuickField name='ip'}}
+		{{> afQuickField name='status' options=statusOption}}
+	</fieldset>
+	<button type="submit" class="btn btn-primary">Insert</button>
+	<button type="submit" class="btn btn-default">Edit</button>
+	{{/autoForm}}
 </template>
