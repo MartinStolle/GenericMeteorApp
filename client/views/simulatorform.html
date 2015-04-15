@@ -1,5 +1,5 @@
 <template name="simulatorform">
-    <form role="form">
+    <form role="form" name="simulatorform" id="simulatorform">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" placeholder="Enter simulator name">
@@ -20,7 +20,9 @@
                 {{/each}}
             </select>
         </div>
-        <button id="add" type="submit" class="btn btn-default">Add</button>
-        <button id="edit" type="submit" class="btn btn-default">Edit</button>
+		<div class="form-group">
+			<input type="submit" value="Add" id="add" class="btn btn-default">
+			<input type="submit" value="Edit" id="edit" class="btn btn-default">
+		</div>
     </form>
 </template>

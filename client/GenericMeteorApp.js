@@ -12,10 +12,15 @@ Template.simulatorform.helpers({
         return statuses.find({});
     },
     'selectedStatus': function(){
-        var statusId = this._id;
-		var status = statuses.findOne(statusId);
+		var status = statuses.findOne(this._id);
+		if (status == undefined) {
+			return "";
+		}
 		var selectedSimulator = Session.get('selectedSimulator');
 		var simulator = simulators.findOne(selectedSimulator);
+		if (simulator == undefined) {
+			return "";
+		}
         if (simulator.status == status.name) {
             return "selected";
         }
@@ -35,9 +40,10 @@ Template.simulatorrow.helpers({
 });
 
 Template.body.events({
-    "click #add": function (event) {
+/*    "click #add": function (event) {
         // Prevent the browser from applying default behaviour to the form
         event.preventDefault();
+		var validationObject = Mesosphere.loginForm.validate(rawFormData);
         var name = document.getElementById("name").value;
         var hostname = document.getElementById("hostname").value;
         var ip = document.getElementById("ip").value;
@@ -49,7 +55,7 @@ Template.body.events({
         document.getElementById("ip").value = "";
         document.getElementById("hostname").value = "";
         return false;
-    },
+    },*/
     "click #edit": function () {
         event.preventDefault();
         var selectedSimulator = Session.get('selectedSimulator');
@@ -60,6 +66,8 @@ Template.body.events({
         Meteor.call('modifySimulator', selectedSimulator, name, hostname, ip, status);
     },
     "click #delete": function () {
+        // Prevent the browser from applying default behaviour to the form
+        event.preventDefault();
         Meteor.call('removeSimulator', this._id);
     },
     "click td": function () {
@@ -68,7 +76,6 @@ Template.body.events({
         document.getElementById("name").value = simulator.name;
         document.getElementById("hostname").value = simulator.hostname;
         document.getElementById("ip").value = simulator.ip;
-        //document.getElementById("status").value status = simulator.status;
         Session.set('selectedSimulator', simulatorId);
     }
 });
