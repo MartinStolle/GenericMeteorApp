@@ -1,6 +1,8 @@
 Meteor.subscribe('Simulators');
 Meteor.subscribe('Statuses');
 
+
+
 Template.simulatortable.helpers({
     simulators: function () {
         return simulators.find({});

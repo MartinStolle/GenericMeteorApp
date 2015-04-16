@@ -16,7 +16,7 @@ Meteor.methods({
             status: status
         });
     },
-    'removeSimulator': function(id){
+    'removeSimulator': function(id) {
         simulators.remove(id);
     },
     'modifySimulator': function(selectedSimulator, name, hostname, ip, status){
@@ -26,6 +26,13 @@ Meteor.methods({
             ip: ip,
             status: status
         }});
+    },
+signupUser:function(rawFormData, templateData){
+        Mesosphere.loginForm.validate(rawFormData, function(errors, formFieldsObject){
+            if(!errors){
+               //Do what we need to do here;
+            }
+        });
     }
 });
 
