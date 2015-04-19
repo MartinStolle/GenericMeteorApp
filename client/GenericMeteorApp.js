@@ -1,28 +1,26 @@
 Meteor.subscribe('Simulators');
 Meteor.subscribe('Statuses');
 
-
-
 Template.simulatortable.helpers({
-    simulators: function () {
+    simulators: function() {
         return simulators.find({});
     }
 });
 
 Template.simulatorform.helpers({
-    statuses: function () {
+    statuses: function() {
         return statuses.find({});
     },
-    'selectedStatus': function(){
-		var status = statuses.findOne(this._id);
-		if (status == undefined) {
-			return "";
-		}
-		var selectedSimulator = Session.get('selectedSimulator');
-		var simulator = simulators.findOne(selectedSimulator);
-		if (simulator == undefined) {
-			return "";
-		}
+    'selectedStatus': function() {
+        var status = statuses.findOne(this._id);
+        if (status == undefined) {
+            return "";
+        }
+        var selectedSimulator = Session.get('selectedSimulator');
+        var simulator = simulators.findOne(selectedSimulator);
+        if (simulator == undefined) {
+            return "";
+        }
         if (simulator.status == status.name) {
             return "selected";
         }
@@ -30,7 +28,7 @@ Template.simulatorform.helpers({
 });
 
 Template.simulatorrow.helpers({
-    'selectedClass': function(){
+    'selectedClass': function() {
         var simulatorId = this._id;
         var selectedSimulator = Session.get('selectedSimulator');
         // Do these IDs match?
@@ -42,23 +40,23 @@ Template.simulatorrow.helpers({
 });
 
 Template.body.events({
-/*    "click #add": function (event) {
-        // Prevent the browser from applying default behaviour to the form
-        event.preventDefault();
-		var validationObject = Mesosphere.loginForm.validate(rawFormData);
-        var name = document.getElementById("name").value;
-        var hostname = document.getElementById("hostname").value;
-        var ip = document.getElementById("ip").value;
-        var status = document.getElementById("status").value;
+    /*    "click #add": function (event) {
+            // Prevent the browser from applying default behaviour to the form
+            event.preventDefault();
+    		var validationObject = Mesosphere.loginForm.validate(rawFormData);
+            var name = document.getElementById("name").value;
+            var hostname = document.getElementById("hostname").value;
+            var ip = document.getElementById("ip").value;
+            var status = document.getElementById("status").value;
 
-        Meteor.call('insertSimulator', name, hostname, ip, status);
+            Meteor.call('insertSimulator', name, hostname, ip, status);
 
-        document.getElementById("name").value = "";
-        document.getElementById("ip").value = "";
-        document.getElementById("hostname").value = "";
-        return false;
-    },*/
-    "click #edit": function () {
+            document.getElementById("name").value = "";
+            document.getElementById("ip").value = "";
+            document.getElementById("hostname").value = "";
+            return false;
+        },*/
+    "click #edit": function() {
         event.preventDefault();
         var selectedSimulator = Session.get('selectedSimulator');
         var name = document.getElementById("name").value;
@@ -67,12 +65,12 @@ Template.body.events({
         var status = document.getElementById("status").value;
         Meteor.call('modifySimulator', selectedSimulator, name, hostname, ip, status);
     },
-    "click #delete": function () {
+    "click #delete": function() {
         // Prevent the browser from applying default behaviour to the form
         event.preventDefault();
         Meteor.call('removeSimulator', this._id);
     },
-    "click td": function () {
+    "click td": function() {
         var simulatorId = this._id;
         var simulator = simulators.findOne(simulatorId);
         document.getElementById("name").value = simulator.name;

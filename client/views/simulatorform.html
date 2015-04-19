@@ -1,31 +1,31 @@
 <template name="simulatorform">
     <form role="form" name="simulatorform" id="simulatorform">
-	 	<div class="form-group">
-	    	<label for="name">Name:</label>
-	    	<input type="text" name="name" id="name" class="form-control" placeholder="Simulator name"/>
-	    	<span id='name-error'></span>
-	  	</div>
-	 	<div class="form-group">
-	    	<label for="hostname">Hostname:</label>
-	    	<input type="text" name="hostname" id="hostname" class="form-control" placeholder="Hostname"/>
-	    	<span id='hostname-error'></span>
-	  	</div>
-	 	<div class="form-group">
-	    	<label for="ip">IPv4 Address:</label>
-	    	<input type="text" name="ip" id="ip" class="form-control" placeholder="192.168.0.1"/>
-	    	<span id='ip-error'></span>
-	  	</div>		
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Simulator name" />
+            <span id='name-error'></span>
+        </div>
+        <div class="form-group">
+            <label for="hostname">Hostname:</label>
+            <input type="text" name="hostname" id="hostname" class="form-control" placeholder="Hostname" />
+            <span id='hostname-error'></span>
+        </div>
+        <div class="form-group">
+            <label for="ip">IPv4 Address:</label>
+            <input type="text" name="ip" id="ip" class="form-control" placeholder="192.168.0.1" />
+            <span id='ip-error'></span>
+        </div>
         <div class="form-group">
             <label for="status">Status:</label>
             <select id="status" class="form-control">
                 {{#each statuses}}
-                    <option {{selectedStatus}}>{{name}}</option>
+                <option {{selectedStatus}}>{{name}}</option>
                 {{/each}}
             </select>
         </div>
-		<div class="form-group">
-			<input type="submit" value="Add" id="add" class="btn btn-default">
-			<input type="submit" value="Edit" id="edit" class="btn btn-default">
-		</div>
+        <div class="form-group">
+            <input type="submit" value="Add" id="add" class="btn btn-default">
+            <input type="submit" value="Edit" id="edit" class="btn btn-default">
+        </div>
     </form>
 </template>

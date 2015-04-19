@@ -1,8 +1,8 @@
-Meteor.publish('Simulators', function () {
+Meteor.publish('Simulators', function() {
     return simulators.find({});
 });
 
-Meteor.publish('Statuses', function () {
+Meteor.publish('Statuses', function() {
     return statuses.find({});
 });
 
@@ -19,35 +19,39 @@ Meteor.methods({
     'removeSimulator': function(id) {
         simulators.remove(id);
     },
-    'modifySimulator': function(selectedSimulator, name, hostname, ip, status){
-        simulators.update(selectedSimulator, {$set: {
-            name: name,
-            hostname: hostname,
-            ip: ip,
-            status: status
-        }});
+    'modifySimulator': function(selectedSimulator, name, hostname, ip, status) {
+        simulators.update(selectedSimulator, {
+            $set: {
+                name: name,
+                hostname: hostname,
+                ip: ip,
+                status: status
+            }
+        });
     },
-signupUser:function(rawFormData, templateData){
-        Mesosphere.loginForm.validate(rawFormData, function(errors, formFieldsObject){
-            if(!errors){
-               //Do what we need to do here;
+    signupUser: function(rawFormData, templateData) {
+        Mesosphere.loginForm.validate(rawFormData, function(errors, formFieldsObject) {
+            if (!errors) {
+                //Do what we need to do here;
             }
         });
     }
 });
 
 // if the database is empty on server start, create some sample data.
-Meteor.startup(function () {
+Meteor.startup(function() {
     if (statuses.find().count() === 0) {
-        var data = [
-            {name: "Available"},
-            {name: "Not available"},
-            {name: "Maintenance"}
-        ];
+        var data = [{
+            name: "Available"
+        }, {
+            name: "Not available"
+        }, {
+            name: "Maintenance"
+        }];
         _.each(data, function(list) {
             statuses.insert({
                 name: list.name
-            });        
+            });
         });
     }
 });
